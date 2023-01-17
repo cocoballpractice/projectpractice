@@ -51,10 +51,32 @@
         </encoder>
    	</appender>
 
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/error.log</file>
+        <!-- 로그 레벨 필터링을 위한 설정 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch> <!-- 위에 설정한 로그와 맞다면 ACCEPT -->
+            <onMismatch>DENY</onMismatch> <!-- 그 외의 로그는 DENY -->
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/archive/error.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>10KB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                [ERROR] ${LOG_PATTERN}
+            </pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+   	</appender>
+
     <root level="INFO">
         <appender-ref ref="REQUEST1" />
         <appender-ref ref="REQUEST2" />
         <appender-ref ref="MDC" />
+        <appender-ref ref="ERROR" />
     </root>
 
 </included>

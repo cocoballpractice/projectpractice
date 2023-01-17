@@ -1,9 +1,0 @@
-#logback.classic pattern: [REQUEST1] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{0}:%line] - %msg%n
-#logback.classic pattern: [REQUEST1] [%-5level] %d{yyyy-MM-dd HH:mm:ss} [%thread] [%logger{0}:%line] - %msg%n
-[REQUEST1] [INFO ] 2023-01-17 16:09:13 [main] [LogbackApplication:55] - Starting LogbackApplication using Java 11.0.15.1 on Hwang-PC with PID 34176 (C:\Users\Hwang\Desktop\공부\github\projectpractice\logback\build\classes\java\main started by Hwang in C:\Users\Hwang\Desktop\공부\github\projectpractice\logback)
-[REQUEST1] [INFO ] 2023-01-17 16:09:13 [main] [LogbackApplication:637] - The following 1 profile is active: "prod"
-[REQUEST1] [INFO ] 2023-01-17 16:09:14 [main] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
-[REQUEST1] [INFO ] 2023-01-17 16:09:14 [main] [StandardService:173] - Starting service [Tomcat]
-[REQUEST1] [INFO ] 2023-01-17 16:09:14 [main] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/9.0.70]
-[REQUEST1] [INFO ] 2023-01-17 16:09:14 [main] [[/]:173] - Initializing Spring embedded WebApplicationContext
-[REQUEST1] [INFO ] 2023-01-17 16:09:14 [main] [ServletWebServerApplicationContext:292] - Root WebApplicationContext: initialization completed in 944 ms

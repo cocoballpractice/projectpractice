@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.9'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java-library' // api 키워드 사용을 위한 세팅
 }
 
 group = 'dev.be'
@@ -23,8 +24,28 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	api 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.mysql:mysql-connector-j'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+// 공통 모듈 의존성 추가 시 반드시 넣을 것
+// 기본값은 true, xxx.jar 파일이 생성되게 됨 -> 파일 안에 어플리케이션 안에 필요한 리소스 (클래스, 의존성 등) 가 전부 들어가게 됨
+// common 모듈의 경우 직접 실행을 시킬 것이 아니기 때문에 jar 파일 생성이 필요없어짐
+// 해당 옵션을 true로 설정하고 빌드하게 되면 jar 파일 생성을 위해 main 클래스를 찾게 되는데 해당 모듈은 main 클래스가 없으므로 에러가 발생
+tasks.bootJar {enabled=false}
+
+// xxx-plain.jar 파일로 생성. 이 경우 클래스와 리소스만 포함하며 의존성은 포함되지 않음. 서버에서 구동이 되지 않게 됨
+tasks.jar { enabled=true }
+
+// clean : 빌드 시 기존 파일들을 전부 초기화하고 빌드
+// stacktrace : 빌드를 하며 예외 발생 시 빠르게 포착하도록 로그를 남기는 옵션
+// info : 로깅 레벨 (해당 레벨부터 그 이상 레벨까지 출력해달라)
+// refresh-dependencies : 의존성 refresh
+// -x test : 중요한 부분, 기본 옵션은 테스트 코드 작성 시 모든 테스트가 통과되어야 빌드가 되지만 이 옵션을 줄 경우 테스트를 제외하고 빌드
+// ./gradlew clean :module-api:buildNeeded --stacktrace --info --refresh-dependencies -x test
